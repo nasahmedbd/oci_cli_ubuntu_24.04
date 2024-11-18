@@ -1,14 +1,71 @@
-# oci_cli_ubuntu_24.04
+# OCI_CLI_Ubuntu_24.04_LTS
 ## Install the Oracle Cloud Infrastructure CLI on Ubuntu 24.04 LTS
 
 ### This is a short post about installing/configuring the Oracle Cloud Infrastructure (OCI) Command Line Interface (CLI) on Ubuntu 24.04 LTS.
 
-**Creating a virtual environment**
+**Creating a virtual environment:**
 The first step is to create a virtual environment to prevent the OCI CLI’s dependencies from messing up my python installation.
+
+```
+mkdir -p ~/development/python && cd ~/development/python
+sudo apt install python3.8-venv
+python3 -m venv oracle-cli
+```
+With the venv in place you need to activate it. This is a crucial step! Don’t forget to run it
+
+```source oracle-cli/bin/activate```
+As soon as the venv is activated you’ll notice its name has become a part of the prompt.
+
+**Downloading the OCI CLI 
+**
+The next step is to download the latest OCI CLI release from [Github](https://github.com/oracle/oci-cli/releases/tag/v3.50.1). At the time of writing, version 3.50.1 was the most current. Ensure you load the vanilla release, e.g. oci-cli-release.zip, not one of the distribution-specific ones. These are to be used for offline installation.
+```
+curl -L "https://github.com/oracle/oci-cli/releases/download/v3.50.1/oci-cli-3.50.1.zip" -o /tmp/oci-cli-3.50.1.zip
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100  136M  100  136M    0     0  1342k      0  0:01:44  0:01:44 --:--:-- 1565k
+```
+> [!TIP]
+> Unzip the release temporarily and begin the installation by invoking pip using the “whl” file in the freshly unzipped directory. 
+
+
+
+> [!WARNING]
+> Just to make sure I always double-check I’m using the pip executable in the virtual environment before proceeding.
+
+
+
+
+You’ll notice additional packages are pulled into the virtual environment by the setup routine. As always, exercise care when using external packages. An [offline installation](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/climanualinst.htm#InstallingCLI_Offline) is available as well if your security requirements mandate it.
+At the end of the process, you have a working installation of the command line interface.
+
+**Configuration**
+Before you can use the CLI you need to provide a configuration file. The default location is ~/.oci, which I’ll use as well.
+
+```mkdir ~/.oci && cd ~/.oci```
+
+Inside of this directory you need to [create a config file](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#File_Name_and_Location); the example below is taken from the documentation and should provide a starting point.
+```
+[DEFAULT]
+user=ocid1.user.oc1..<unique_ID>
+fingerprint=<your_fingerprint>
+key_file=~/.oci/oci_api_key.pem
+tenancy=ocid1.tenancy.oc1..<unique_ID>
+region=us-ashburn-1
+```
+
+
+Make sure to update the values accordingly. Should you be unsure about the user OCID and/or API signing key to use, yum may go through the [documentation](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm) for instructions. Next time you invoke the CLI the DEFAULT configuration will be used. 
+
+
+
+
+> [!NOTE]
+> Logs 
 ```
 root@nasim-desktop:~# mkdir -p ~/development/python && cd ~/development/python
-root@nasim-desktop:~/development/python# python3 -m venv oracle-cli
-root@nasim-desktop:~/development/python# sudo apt install python3.8-venv
+root@nasim-desktop:~/development/python# apt install python3.8-venv
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -64,15 +121,13 @@ Setting up python3.8-venv (3.8.20-1+noble1) ...
 Processing triggers for gnome-menus (3.36.0-1.1ubuntu3) ...
 Processing triggers for man-db (2.12.0-4build2) ...
 Processing triggers for desktop-file-utils (0.27-2build1) ...
+root@nasim-desktop:~/development/python# python3 -m venv oracle-cli
 root@nasim-desktop:~/development/python# source oracle-cli/bin/activate
 (oracle-cli) root@nasim-desktop:~/development/python# curl -L "https://github.com/oracle/oci-cli/releases/download/v3.50.1/oci-cli-3.50.1.zip" -o /tmp/oci-cli-3.50.1.zip
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
 100  136M  100  136M    0     0  1342k      0  0:01:44  0:01:44 --:--:-- 1565k
-(oracle-cli) root@nasim-desktop:~/development/python# which pip
-(oracle-cli) root@nasim-desktop:~/development/python# ls -l /tmp/oci-cli/
-ls: cannot access '/tmp/oci-cli/': No such file or directory
 (oracle-cli) root@nasim-desktop:~/development/python# pip install /tmp/oci-cli-3.50.1/oci-cli/oci_cli-3.50.1-py3-none-any.whl
 Processing /tmp/oci-cli-3.50.1/oci-cli/oci_cli-3.50.1-py3-none-any.whl
 Collecting oci==2.138.1 (from oci-cli==3.50.1)
