@@ -34,6 +34,9 @@ curl -L "https://github.com/oracle/oci-cli/releases/download/v3.50.1/oci-cli-3.5
 > [!WARNING]
 > Just to make sure I always double-check I’m using the pip executable in the virtual environment before proceeding.
 
+> [!IMPORTANT]
+> If you want to complete all tasks at once just run the following -
+> bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 
 
 
