@@ -35,8 +35,8 @@ curl -L "https://github.com/oracle/oci-cli/releases/download/v3.50.1/oci-cli-3.5
 > Just to make sure I always double-check I’m using the pip executable in the virtual environment before proceeding.
 
 > [!IMPORTANT]
-> If you want to complete all tasks at once just run the following -
-> bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+> If you want to complete all tasks at once, just open a terminal and run the command [
+> bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" ]
 
 
 
@@ -48,7 +48,7 @@ Before you can use the CLI you need to provide a configuration file. The default
 
 ```mkdir ~/.oci && cd ~/.oci```
 
-Inside of this directory you need to [create a config file](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#File_Name_and_Location); the example below is taken from the documentation and should provide a starting point.
+Inside of this directory, you need to [create a config file](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#File_Name_and_Location); the example below is taken from the documentation and should provide a starting point.
 ```
 [DEFAULT]
 user=ocid1.user.oc1..<unique_ID>
