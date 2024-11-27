@@ -36,7 +36,7 @@ curl -L "https://github.com/oracle/oci-cli/releases/download/v3.50.1/oci-cli-3.5
 
 > [!IMPORTANT]
 > If you want to complete all tasks at once, just open a terminal and run the command [
-> bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" ]
+> bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" ] More [details](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix)
 
 
 
